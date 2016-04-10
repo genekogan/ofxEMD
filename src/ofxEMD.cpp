@@ -19,17 +19,15 @@ double ofxEMD::getEmd(vector<ofVec3f> features1, vector<double> weights1, vector
     for (int k=0; k<features2.size(); k++) {
         f2[k] = {static_cast<float>(features2[k][0]), static_cast<float>(features2[k][1]), static_cast<float>(features2[k][2])};
     }
-    
-    int iw1 = 0, iw2 = 0;
-    for (auto w : weights1) {
-        w1[iw1++] = w;
+
+    for (int i=0; i<weights1.size(); i++) {
+        w1[i] = weights1[i];
     }
-    for (auto w : weights2) {
-        w2[iw2++] = w;
+    for (int i=0; i<weights2.size(); i++) {
+        w2[i] = weights2[i];
     }
     
     signature_t s1 = { n1, f1, w1};
     signature_t s2 = { n2, f2, w2};
-    
-    return emd(&s2, &s2, dist, 0, 0);
+    return emd(&s1, &s2, dist, 0, 0);
 }
